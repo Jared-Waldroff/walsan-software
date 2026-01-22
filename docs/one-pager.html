@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Missing Calls, Start Closing More Jobs | Walsan Software</title>
+    <meta name="description"
+        content="AI-powered automation for home service businesses. Never miss a call. Close more quotes. Get more 5-star reviews.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
+        :root {
+            --color-bg-primary: #0c1929;
+            --color-bg-secondary: #132238;
+            --color-bg-card: #1a2d47;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #9eb3c7;
+            --color-text-muted: #6b8299;
+            --color-accent-primary: #c9a56c;
+            --color-accent-secondary: #b87333;
+            --color-success: #22c55e;
+            --color-danger: #ef4444;
+            --gradient-primary: linear-gradient(135deg, #c9a56c 0%, #b87333 50%, #a05a2c 100%);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 165, 108, 0.2);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: #f5f0e8;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(201, 165, 108, 0.3);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .headline {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .headline .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subheadline {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Problem/Solution Section */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 700px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .problem-card,
+        .solution-card {
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid;
+        }
+
+        .problem-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .solution-card {
+            background: rgba(34, 197, 94, 0.05);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .problem-card .card-icon {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .solution-card .card-icon {
+            background: rgba(34, 197, 94, 0.15);
+        }
+
+        .card-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .problem-card .card-icon svg {
+            stroke: var(--color-danger);
+        }
+
+        .solution-card .card-icon svg {
+            stroke: var(--color-success);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        .card-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            margin-top: 8px;
+            border-radius: 50%;
+        }
+
+        .problem-card .card-list li::before {
+            background: var(--color-danger);
+        }
+
+        .solution-card .card-list li::before {
+            background: var(--color-success);
+        }
+
+        /* What You Get Section */
+        .services-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-item {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(30, 77, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 165, 108, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.2), rgba(184, 115, 51, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(201, 165, 108, 0.2);
+        }
+
+        .service-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--color-accent-primary);
+        }
+
+        .service-item h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-item p {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(201, 165, 108, 0.15);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Investment Section */
+        .investment-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.1), rgba(30, 77, 107, 0.2));
+            border: 2px solid rgba(201, 165, 108, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+
+        .price-note {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .price-includes {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .price-includes h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .price-includes ul {
+            list-style: none;
+        }
+
+        .price-includes li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .price-includes li svg {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-success);
+        }
+
+        /* CTA */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1.25rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--color-bg-primary);
+            font-size: 1.125rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(201, 165, 108, 0.35);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(201, 165, 108, 0.45);
+        }
+
+        .cta-button svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 165, 108, 0.15);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            color: var(--color-accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .footer-contact a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-contact svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: #1a1a1a;
+            }
+
+            .page {
+                padding: 0;
+            }
+
+            .service-item,
+            .stats-section,
+            .price-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="favicon.jpg" alt="Walsan Software">
+            </div>
+            <p class="tagline">AI Automation for Home Service Businesses</p>
+            <h1 class="headline">
+                Stop Losing Jobs to <span class="highlight">Missed Calls</span>
+            </h1>
+            <p class="subheadline">
+                Your AI receptionist answers every call, books appointments, follows up on quotes, and gets you more
+                5-star reviews—24/7.
+            </p>
+        </header>
+
+        <!-- Problem / Solution -->
+        <div class="problem-solution">
+            <div class="problem-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="m15 9-6 6" />
+                            <path d="m9 9 6 6" />
+                        </svg>
+                    </div>
+                    <h2 class="card-title">The Problem</h2>
+                </div>
+                <ul class="card-list">
+                    <li>You're on a job and can't answer the phone</li>
+                    <li>Customers call a competitor instead of leaving a voicemail</li>
+                    <li>Quotes go cold because no one followed up</li>
+                    <li>You're too busy working IN the business to work ON it</li>
+                    <li>Happy customers forget to leave reviews</li>
+                </ul>
+            </div>
+            <div class="solution-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                    </div>
+                    <h2 class="card-title">The Solution</h2>
+                </div>
+                <ul class="card-list">
+                    <li>AI answers every call like your best employee</li>
+                    <li>Missed calls get an instant text back</li>
+                    <li>Every quote gets followed up automatically</li>
+                    <li>Appointments booked directly into your calendar</li>
+                    <li>Reviews requested automatically when jobs complete</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- What You Get -->
+        <section class="services-section">
+            <h2 class="section-title">What's Included</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <h3>24/7 AI Voice Receptionist</h3>
+                    <p>Custom-trained AI that answers calls, qualifies leads, and books appointments—even at 2am.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                    </div>
+                    <h3>Instant SMS Text-Back</h3>
+                    <p>Every missed call gets an immediate text so customers stop shopping and wait for you.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10" />
+                            <path d="M18 20V4" />
+                            <path d="M6 20v-4" />
+                        </svg>
+                    </div>
+                    <h3>Automated Quote Follow-Up</h3>
+                    <p>Pending quotes get followed up until signed or lost. Increase close rates by 20%+.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <h3>The Review Loop</h3>
+                    <p>Automatic Google review requests the moment a job is marked complete in your CRM.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Hours saved per week</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Increase in quote close rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Missed calls</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment -->
+        <section class="investment-section">
+            <div class="price-card">
+                <p class="price-label">One-Time Investment</p>
+                <p class="price-amount">$10,000 <span>CAD</span></p>
+                <p class="price-note">Complete setup, training & integration</p>
+
+                <div class="price-includes">
+                    <h4>Everything Included</h4>
+                    <ul>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Full AI voice receptionist setup & training
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            CRM integration (Jobber, ServiceTitan, HCP)
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            SMS text-back automation
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Quote nurturing workflows
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            Review automation
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                            14-21 day go-live timeline
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="mailto:jared@walsansoftware.com?subject=AI%20Automation%20Inquiry" class="cta-button">
+                    Let's Talk
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">Serving HVAC, Plumbing, Electrical & Landscaping businesses across Canada</p>
+            <div class="footer-contact">
+                <a href="tel:250-808-5958">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72" />
+                    </svg>
+                    250-808-5958
+                </a>
+                <a href="mailto:jared@walsansoftware.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    jared@walsansoftware.com
+                </a>
+                <a href="https://walsansoftware.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                    walsansoftware.com
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

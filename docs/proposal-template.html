@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal | Walsan Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-primary: #0c1929;
+            --color-bg-secondary: #132238;
+            --color-bg-card: #1a2d47;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #9eb3c7;
+            --color-text-muted: #6b8299;
+            --color-accent-primary: #c9a56c;
+            --color-accent-secondary: #b87333;
+            --color-success: #22c55e;
+            --gradient-primary: linear-gradient(135deg, #c9a56c 0%, #b87333 50%, #a05a2c 100%);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.7;
+        }
+
+        .proposal {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Cover */
+        .cover {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.05), rgba(30, 77, 107, 0.1));
+            border-radius: 24px;
+            border: 1px solid rgba(201, 165, 108, 0.2);
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: #f5f0e8;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-bg-primary);
+        }
+
+        .cover-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .cover-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-accent-primary);
+            margin-bottom: 2rem;
+        }
+
+        .cover-client {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+        }
+
+        .cover-client strong {
+            color: var(--color-text-primary);
+        }
+
+        .cover-date {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(201, 165, 108, 0.3);
+        }
+
+        .section-title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Problem/Solution */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ps-card {
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid;
+        }
+
+        .problem-card {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .solution-card {
+            background: rgba(34, 197, 94, 0.05);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .ps-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h4 {
+            color: #ef4444;
+        }
+
+        .solution-card h4 {
+            color: #22c55e;
+        }
+
+        .ps-card ul {
+            list-style: none;
+        }
+
+        .ps-card li {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .ps-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .problem-card li::before {
+            background: #ef4444;
+        }
+
+        .solution-card li::before {
+            background: #22c55e;
+        }
+
+        /* Deliverables */
+        .deliverables {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .deliverable {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(30, 77, 107, 0.3);
+        }
+
+        .deliverable h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .deliverable-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.2), rgba(184, 115, 51, 0.2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .deliverable-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-accent-primary);
+        }
+
+        .deliverable p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Investment */
+        .investment-card {
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.08), rgba(30, 77, 107, 0.15));
+            border: 2px solid rgba(201, 165, 108, 0.25);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .investment-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent-primary);
+        }
+
+        .investment-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin: 0.5rem 0;
+        }
+
+        .investment-amount span {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            font-weight: 600;
+        }
+
+        .investment-note {
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .payment-terms {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .payment-term {
+            background: rgba(30, 77, 107, 0.3);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .payment-term-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        .payment-term-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: rgba(201, 165, 108, 0.2);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-dot {
+            width: 32px;
+            height: 32px;
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-content h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Guarantee */
+        .guarantee {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .guarantee-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(34, 197, 94, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .guarantee-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--color-success);
+        }
+
+        .guarantee h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .guarantee p {
+            margin: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Next Steps */
+        .next-steps {
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .next-steps h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps p {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--color-bg-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(201, 165, 108, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(201, 165, 108, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 165, 108, 0.15);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--color-accent-primary);
+            text-decoration: none;
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: white;
+                color: #1a1a1a;
+            }
+
+            .proposal {
+                padding: 0;
+            }
+
+            .section,
+            .cover {
+                break-inside: avoid;
+            }
+        }
+
+        /* Editable fields */
+        .editable {
+            background: rgba(201, 165, 108, 0.1);
+            border: 1px dashed rgba(201, 165, 108, 0.4);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: var(--color-accent-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="proposal">
+        <!-- Cover -->
+        <div class="cover">
+            <div class="cover-logo">W</div>
+            <h1 class="cover-title">AI Automation Proposal</h1>
+            <p class="cover-subtitle">Lead-to-Legacy System</p>
+            <p class="cover-client">
+                Prepared for: <strong><span class="editable">[Client Business Name]</span></strong>
+            </p>
+            <p class="cover-date">
+                <span class="editable">[Date]</span>
+            </p>
+        </div>
+
+        <!-- The Challenge -->
+        <section class="section">
+            <h2 class="section-title">The <span>Challenge</span></h2>
+            <p>After our conversation, it's clear that <span class="editable">[Client Business Name]</span> is facing
+                the same challenge we see across the home service industry: you're too busy working IN the business to
+                work ON the business.</p>
+
+            <div class="problem-solution">
+                <div class="ps-card problem-card">
+                    <h4>Current Pain Points</h4>
+                    <ul>
+                        <li>Missed calls while on job sites</li>
+                        <li>Customers calling competitors instead of leaving voicemails</li>
+                        <li>Quotes going cold without follow-up</li>
+                        <li>Satisfied customers not leaving reviews</li>
+                        <li>Hours spent on admin instead of billable work</li>
+                    </ul>
+                </div>
+                <div class="ps-card solution-card">
+                    <h4>What We'll Fix</h4>
+                    <ul>
+                        <li>Every call answered 24/7 by AI</li>
+                        <li>Instant text-back on any missed call</li>
+                        <li>Automated quote follow-up sequence</li>
+                        <li>Review requests on job completion</li>
+                        <li>10+ hours/week returned to you</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- What You Get -->
+        <section class="section">
+            <h2 class="section-title">What You <span>Get</span></h2>
+            <div class="deliverables">
+                <div class="deliverable">
+                    <h4>
+                        <div class="deliverable-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72" />
+                            </svg>
+                        </div>
+                        24/7 AI Voice Receptionist
+                    </h4>
+                    <p>Custom-trained AI that answers calls, qualifies leads, and books appointments directly into your
+                        CRM—even at 2am or while you're on a ladder.</p>
+                </div>
+                <div class="deliverable">
+                    <h4>
+                        <div class="deliverable-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                        </div>
+                        Instant SMS Text-Back
+                    </h4>
+                    <p>If a call somehow goes to voicemail, the customer immediately gets a text: "Sorry we missed you!
+                        We'll call back within 15 minutes." Keeps them from shopping around.</p>
+                </div>
+                <div class="deliverable">
+                    <h4>
+                        <div class="deliverable-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20V10" />
+                                <path d="M18 20V4" />
+                                <path d="M6 20v-4" />
+                            </svg>
+                        </div>
+                        Automated Quote Nurturing
+                    </h4>
+                    <p>Every pending quote gets followed up at Day 1, 3, and 7 via SMS until signed or lost. Expect to
+                        close 20%+ more quotes without lifting a finger.</p>
+                </div>
+                <div class="deliverable">
+                    <h4>
+                        <div class="deliverable-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        The Review Loop
+                    </h4>
+                    <p>The moment a job is marked complete in <span class="editable">[Jobber/ServiceTitan]</span>, the
+                        customer gets a personalized Google Review request. More 5-stars = better rankings = more leads.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment -->
+        <section class="section">
+            <h2 class="section-title">Your <span>Investment</span></h2>
+            <div class="investment-card">
+                <p class="investment-label">One-Time Setup</p>
+                <p class="investment-amount">$10,000 <span>CAD</span></p>
+                <p class="investment-note">Complete setup, training, integration, and go-live support</p>
+
+                <div class="payment-terms">
+                    <div class="payment-term">
+                        <p class="payment-term-label">Deposit (to begin)</p>
+                        <p class="payment-term-value">$5,000</p>
+                    </div>
+                    <div class="payment-term">
+                        <p class="payment-term-label">Balance (at go-live)</p>
+                        <p class="payment-term-value">$5,000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section">
+            <h2 class="section-title">Project <span>Timeline</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <h4>Onboarding (Days 1-3)</h4>
+                        <p>Kickoff call, access collection, business brain transfer</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <h4>Build & Integrate (Days 4-10)</h4>
+                        <p>AI training, CRM integration, workflow automation</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <h4>Shadow Period (Days 11-14)</h4>
+                        <p>You test everything, we refine based on feedback</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <h4>Go Live! (Day 14-21)</h4>
+                        <p>Full launch with monitoring and support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee -->
+        <section class="section">
+            <div class="guarantee">
+                <div class="guarantee-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <h4>30-Day Money-Back Guarantee</h4>
+                <p>If you're not completely satisfied within 30 days of go-live, we'll refund your investment in full.
+                    No questions asked.</p>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="section">
+            <div class="next-steps">
+                <h3>Ready to Get Started?</h3>
+                <p>Reply to this proposal or book a call to lock in your spot. We only take on 2-3 new clients per month
+                    to ensure white-glove service.</p>
+                <a href="mailto:jared@walsansoftware.com?subject=Let's%20Do%20This%20-%20<span class='editable'>[Client Name]</span>"
+                    class="cta-button">
+                    Let's Do This
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Walsan Software Inc. | <a href="tel:250-808-5958">250-808-5958</a> | <a
+                    href="mailto:jared@walsansoftware.com">jared@walsansoftware.com</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

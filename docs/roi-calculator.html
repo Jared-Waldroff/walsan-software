@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator | Walsan Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
+        :root {
+            --color-bg-primary: #0c1929;
+            --color-bg-secondary: #132238;
+            --color-bg-card: #1a2d47;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #9eb3c7;
+            --color-text-muted: #6b8299;
+            --color-accent-primary: #c9a56c;
+            --color-accent-secondary: #b87333;
+            --color-success: #22c55e;
+            --gradient-primary: linear-gradient(135deg, #c9a56c 0%, #b87333 50%, #a05a2c 100%);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: #f5f0e8;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Input Card */
+        .card {
+            background: var(--color-bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(30, 77, 107, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-title svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-accent-primary);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+        }
+
+        .input-hint {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 0.4rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(30, 77, 107, 0.5);
+            border-radius: 12px;
+            color: var(--color-text-primary);
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--color-accent-primary);
+            box-shadow: 0 0 0 3px rgba(201, 165, 108, 0.15);
+        }
+
+        .input-field::placeholder {
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+
+        /* Slider */
+        .slider-container {
+            margin-top: 0.75rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--color-bg-secondary);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(201, 165, 108, 0.4);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(201, 165, 108, 0.15);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--color-accent-primary);
+        }
+
+        /* Results Card */
+        .results-card {
+            background: linear-gradient(135deg, rgba(201, 165, 108, 0.08), rgba(30, 77, 107, 0.15));
+            border-color: rgba(201, 165, 108, 0.25);
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(201, 165, 108, 0.1);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        .result-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .result-highlight {
+            padding: 1.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .result-highlight-label {
+            font-size: 0.875rem;
+            color: var(--color-success);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-highlight-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-success);
+        }
+
+        .result-highlight-note {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* ROI Badge */
+        .roi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: 9999px;
+            font-weight: 700;
+            color: var(--color-bg-primary);
+            margin-top: 1rem;
+        }
+
+        /* Breakdown */
+        .breakdown-section {
+            margin-top: 2rem;
+        }
+
+        .breakdown-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+
+        .breakdown-item span:first-child {
+            color: var(--color-text-secondary);
+        }
+
+        .breakdown-item span:last-child {
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--color-success);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-section p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--color-bg-primary);
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(201, 165, 108, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(201, 165, 108, 0.4);
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="favicon.jpg" alt="Walsan Software">
+            </div>
+            <h1>Calculate Your <span>ROI</span></h1>
+            <p>See how much revenue you're leaving on the table with missed calls</p>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Inputs -->
+            <div class="card">
+                <h2 class="card-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20V10" />
+                        <path d="M18 20V4" />
+                        <path d="M6 20v-4" />
+                    </svg>
+                    Your Numbers
+                </h2>
+
+                <div class="input-group">
+                    <label class="input-label">Average Job Value</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">$</span>
+                        <input type="number" class="input-field" id="avgJobValue" value="500" min="100" max="50000">
+                    </div>
+                    <p class="input-hint">What's your average ticket size?</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Calls Per Week</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">#</span>
+                        <input type="number" class="input-field" id="callsPerWeek" value="30" min="5" max="200">
+                    </div>
+                    <p class="input-hint">Approximate inbound calls you receive weekly</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Missed Call Rate</label>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="missedRate" value="25" min="5" max="60">
+                        <span class="slider-value" id="missedRateValue">25%</span>
+                    </div>
+                    <p class="input-hint">Industry average for home services: 20-35%</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Lead-to-Job Conversion Rate</label>
+                    <div class="slider-container">
+                        <input type="range" class="slider" id="conversionRate" value="40" min="10" max="80">
+                        <span class="slider-value" id="conversionRateValue">40%</span>
+                    </div>
+                    <p class="input-hint">How many quotes turn into jobs?</p>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="card results-card">
+                <h2 class="card-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                    Your Results
+                </h2>
+
+                <div class="result-row">
+                    <span class="result-label">Missed Calls Per Week</span>
+                    <span class="result-value" id="missedCallsWeek">8</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="result-label">Lost Jobs Per Month</span>
+                    <span class="result-value" id="lostJobsMonth">13</span>
+                </div>
+
+                <div class="result-row">
+                    <span class="result-label">Revenue Lost Monthly</span>
+                    <span class="result-value" id="revenueLostMonth">$6,500</span>
+                </div>
+
+                <div class="result-highlight">
+                    <p class="result-highlight-label">Annual Revenue Lost</p>
+                    <p class="result-highlight-value" id="revenueLostYear">$78,000</p>
+                    <p class="result-highlight-note">From missed calls alone</p>
+                </div>
+
+                <div class="breakdown-section">
+                    <h3 class="breakdown-title">With Walsan AI</h3>
+                    <div class="breakdown-item">
+                        <span>Investment (one-time)</span>
+                        <span>$10,000</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Revenue Recovered (Year 1)</span>
+                        <span class="positive" id="revenueRecovered">+$62,400</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Quote Close Rate Boost (+20%)</span>
+                        <span class="positive" id="closeRateBoost">+$15,600</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <div class="roi-badge">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="m22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <path d="m22 4-10 10-3-3" />
+                        </svg>
+                        <span id="roiPercent">680%</span> First Year ROI
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Stop Leaving Money on the Table</h2>
+            <p>Let's talk about how we can recover your lost revenue</p>
+            <a href="mailto:jared@walsansoftware.com?subject=ROI%20Calculator%20Inquiry" class="cta-button">
+                Schedule a Call
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const avgJobValueInput = document.getElementById('avgJobValue');
+        const callsPerWeekInput = document.getElementById('callsPerWeek');
+        const missedRateSlider = document.getElementById('missedRate');
+        const conversionRateSlider = document.getElementById('conversionRate');
+
+        const missedRateValue = document.getElementById('missedRateValue');
+        const conversionRateValue = document.getElementById('conversionRateValue');
+
+        const missedCallsWeek = document.getElementById('missedCallsWeek');
+        const lostJobsMonth = document.getElementById('lostJobsMonth');
+        const revenueLostMonth = document.getElementById('revenueLostMonth');
+        const revenueLostYear = document.getElementById('revenueLostYear');
+        const revenueRecovered = document.getElementById('revenueRecovered');
+        const closeRateBoost = document.getElementById('closeRateBoost');
+        const roiPercent = document.getElementById('roiPercent');
+
+        function formatCurrency(num) {
+            return '$' + num.toLocaleString('en-US', { maximumFractionDigits: 0 });
+        }
+
+        function calculate() {
+            const avgJobValue = parseFloat(avgJobValueInput.value) || 500;
+            const callsPerWeek = parseFloat(callsPerWeekInput.value) || 30;
+            const missedRate = parseFloat(missedRateSlider.value) / 100;
+            const conversionRate = parseFloat(conversionRateSlider.value) / 100;
+
+            // Update slider displays
+            missedRateValue.textContent = Math.round(missedRate * 100) + '%';
+            conversionRateValue.textContent = Math.round(conversionRate * 100) + '%';
+
+            // Calculations
+            const missedPerWeek = Math.round(callsPerWeek * missedRate);
+            const missedPerMonth = missedPerWeek * 4.33;
+            const lostJobs = Math.round(missedPerMonth * conversionRate);
+            const lostRevenueMonth = lostJobs * avgJobValue;
+            const lostRevenueYear = lostRevenueMonth * 12;
+
+            // With AI (assuming 80% recovery of missed calls)
+            const recoveryRate = 0.8;
+            const recoveredJobs = Math.round(missedPerMonth * conversionRate * recoveryRate);
+            const recoveredRevenue = recoveredJobs * avgJobValue * 12;
+
+            // Close rate boost (20% improvement on existing conversions)
+            const currentMonthlyJobs = Math.round(callsPerWeek * 4.33 * (1 - missedRate) * conversionRate);
+            const boostRevenue = Math.round(currentMonthlyJobs * 0.20 * avgJobValue * 12);
+
+            // ROI
+            const totalBenefit = recoveredRevenue + boostRevenue;
+            const investment = 10000;
+            const roi = Math.round((totalBenefit / investment) * 100);
+
+            // Update display
+            missedCallsWeek.textContent = missedPerWeek;
+            lostJobsMonth.textContent = lostJobs;
+            revenueLostMonth.textContent = formatCurrency(lostRevenueMonth);
+            revenueLostYear.textContent = formatCurrency(lostRevenueYear);
+            revenueRecovered.textContent = '+' + formatCurrency(recoveredRevenue);
+            closeRateBoost.textContent = '+' + formatCurrency(boostRevenue);
+            roiPercent.textContent = roi + '%';
+        }
+
+        // Event listeners
+        avgJobValueInput.addEventListener('input', calculate);
+        callsPerWeekInput.addEventListener('input', calculate);
+        missedRateSlider.addEventListener('input', calculate);
+        conversionRateSlider.addEventListener('input', calculate);
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+
+</html>
